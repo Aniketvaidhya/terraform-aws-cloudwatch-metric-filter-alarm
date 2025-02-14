@@ -54,6 +54,18 @@ variable "alarm_action_arns" {
   default     = []
 }
 
+variable "alarm_ok_actions" {
+  type        = list(string)
+  description = "The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Number (ARN)"
+  default     = []
+}
+
+variable "alarm_insufficient_data_actions" {
+  type        = list(string)
+  description = "The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Number (ARN)"
+  default     = []
+}
+
 variable "comparison_operator" {
   type        = string
   description = "The arithmetic operation to use when comparing the specified Statistic and Threshold. The specified Statistic value is used as the first operand. Either of the following is supported: GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold"
