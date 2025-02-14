@@ -25,20 +25,35 @@ resource "aws_cloudwatch_log_group" "MyLogGroup" {
 }
 
 resource "aws_sns_topic" "MyTopic" {
-  name         = "MyTopic"
-  display_name = "My Topic"
+  name         = "my-sns-topic"
+  display_name = "my sns topic"
 }
 
 module "my_metric_filter_alarm" {
-  source = "dwp/metric-filter-alarm/aws"
+  source = "aniketvaidhya/metric-filter-alarm/aws"
 
   log_group_name    = aws_cloudwatch_log_group.MyLogGroup.name
   metric_namespace  = "MyMetricNamespace"
   pattern           = "ERROR"
-  alarm_name        = "MyAlarm"
-  alarm_action_arns = [aws_sns_topic.MyTopic.arn]
-  period            = "3600"
+  alarm_name        = "MyFunctionErrorAlarm"
+
+  period            = "60"
   threshold         = "5"
-  statistic         = "Sum"
+  statistic         = "Max"
+
+  # Optional SNS topic ARNs for alarm actions
+  alarm_actions = [
+    "arn:aws:sns:us-west-2:123456789012:my-sns-topic"
+  ]
+
+    # Optional OK actions
+  ok_actions = [
+    "arn:aws:sns:us-west-2:123456789012:my-sns-topic"
+  ]
+
+  # Optional insufficient data actions
+  insufficient_data_actions = [
+    "arn:aws:sns:us-west-2:123456789012:my-sns-topic"
+  ]
 }
 ```
