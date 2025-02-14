@@ -101,3 +101,9 @@ variable "treat_missing_data" {
   description = "(optional) How the alarm is to handle missing data points. Either of the following is supported: missing, ignore, breaching, and notBreaching."
   default     = "missing"
 }
+
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type        = map(string)
+  default     = {}
+}
