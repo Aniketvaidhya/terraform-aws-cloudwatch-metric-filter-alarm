@@ -10,7 +10,6 @@ resource "aws_cloudwatch_log_metric_filter" "metric_filter" {
   name    = var.metric_filter_name != "" ? var.metric_filter_name : var.alarm_name
   pattern = var.pattern
 
-  tags = var.tags
 }
 
 resource "aws_cloudwatch_metric_alarm" "metric_alarm" {
